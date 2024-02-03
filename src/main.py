@@ -23,7 +23,7 @@ leftRear = Motor(Ports.PORT10, GearSetting.RATIO_18_1, True)
 rightRear = Motor(Ports.PORT9, GearSetting.RATIO_18_1, False)       
 leftFront = Motor(Ports.PORT5, GearSetting.RATIO_18_1, True)       
 rightFront = Motor(Ports.PORT4, GearSetting.RATIO_18_1, False)
-throwMotor = Motor(Ports.PORT20, GearSetting.RATIO_18_1, False)
+throwMotor = Motor(Ports.PORT20, GearSetting.RATIO_18_1, True)
 
 # liftMotor = Motor(Ports.PORT11, GearSetting.RATIO_18_1, False)
 # liftMotor.set_stopping(HOLD)
@@ -144,7 +144,7 @@ def tuck():
 def untuck():
     throwMotor.set_velocity(100, PERCENT)
     throwMotor.spin(REVERSE)
-    wait(200, MSEC)
+    wait(300, MSEC)
     throwMotor.stop()
 
 def throwFar():
@@ -185,8 +185,9 @@ def autonmousleft():
     # wait(500, MSEC)
     move(1, 40, 2500)
     tuck()
-    move(2, 40, 4500)
-    move(6, 40, 2500)
+    move(2, 40, 3000)
+    # move(4, 40, 1000)
+    move(6, 40, 3500)
 
 def autonmousright():
     # move(4, 20, 1000)
