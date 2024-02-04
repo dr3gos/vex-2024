@@ -25,8 +25,10 @@ leftFront = Motor(Ports.PORT5, GearSetting.RATIO_18_1, True)
 rightFront = Motor(Ports.PORT4, GearSetting.RATIO_18_1, False)
 throwMotor = Motor(Ports.PORT20, GearSetting.RATIO_18_1, True)
 
-# liftMotor = Motor(Ports.PORT11, GearSetting.RATIO_18_1, False)
-# liftMotor.set_stopping(HOLD)
+leftLifter = Motor (Ports.PORT1, GearSetting.RATIO_18_1, False)
+rightLifter = Motor (Ports.PORT2, GearSetting.RATIO_18_1, True)
+leftLifter.set_stopping(HOLD)
+rightLifter.set_stopping(HOLD)
 
 wait(30, MSEC)
 
@@ -125,15 +127,17 @@ def move(direction, power, duration):
         leftRear.stop()
         rightRear.stop()
 
-# def lifing():
-#     if controller_1.buttonX.pressing():
-#         liftMotor.set_velocity(100, PERCENT)    
-#         liftMotor.spin(FORWARD)
-#     elif controller_1.buttonB.pressing():
-#         liftMotor.set_velocity(-100, PERCENT)
-#         liftMotor.spin(FORWARD)
-#     else:
-#         liftMotor.stop()
+def lifing():
+    if controller_1.buttonL2.pressing():
+        power = 100
+    elif controller_1.buttonR2.pressing():
+        power = -100
+    else:
+        power = 0
+    leftLifter.set_velocity(power, PERCENT)
+    rightLifter.set_velocity(power, PERCENT)
+    leftLifter.spin(FORWARD)
+    rightLifter.spin(FORWARD)
 
 def tuck():
     throwMotor.set_velocity(100, PERCENT)
@@ -250,7 +254,7 @@ while 1:
         while 1:
             driving()
             throw()
-            # lifing()
+            lifing()
             if controller_1.buttonA.pressing():
                 throwFar()
             if controller_1.buttonUp.pressing():
